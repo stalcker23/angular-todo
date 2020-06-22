@@ -1,0 +1,23 @@
+
+<div class="app-data-table-container table table-striped">
+  <table class="thead-light" style="width:100%">
+    <thead>
+      <tr>
+        <th *ngFor="let cowPropertyKey of cowProperties | cowKeys; trackBy: trackChanges"
+          sortable="{{cowPropertyKey.original}}" 
+          (sort)="onSort($event)" 
+          class="app-data-table_cell-header"
+        >
+          {{cowPropertyKey.normalized}}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cow of cows">
+        <td class="app-data-table_cell" *ngFor="let cowPropertyValue of cow | objectValues">
+          {{cowPropertyValue || "Empty"}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

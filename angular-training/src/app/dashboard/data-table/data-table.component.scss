@@ -1,0 +1,15 @@
+.app-data-table_cell-header {
+    text-transform: capitalize;
+    white-space: nowrap;
+    cursor: pointer;
+
+    &.asc:before {
+        font-family: FontAwesome;
+        content: "\f0de";
+    }
+
+    &.desc:before {
+        font-family: FontAwesome;
+        content: "\f0dd";
+    }
+}
