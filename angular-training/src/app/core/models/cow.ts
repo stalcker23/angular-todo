@@ -36,7 +36,7 @@ export class Cow {
 
     constructor() {}
 
-    public static createInstance(initializer: Cow): Cow {
+    public static createInstance(initializer: any): Cow {
         const instance = new Cow();
 
         instance.cowId = initializer.cowId;

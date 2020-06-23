@@ -12,4 +12,31 @@
         font-family: FontAwesome;
         content: "\f0dd";
     }
+    &.sort:before {
+        font-family: FontAwesome;
+        content: "\f0dc";
+    }
+}
+
+.action {
+    padding-top: 0.65rem;
+
+    .close {
+        float: left;
+    }
+}
+
+.deleting-modal .modal-dialog {
+    animation-name: modal;
+    animation-duration: 1s;
+}
+
+@keyframes modal {
+    from {
+        margin-top: -20%;
+      }
+    
+      to {
+        margin-top: 28px;
+      }
 }

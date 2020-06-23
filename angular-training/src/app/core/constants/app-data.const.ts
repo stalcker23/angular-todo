@@ -1,8 +1,8 @@
-{
-  "offset": 0,
-  "limit": 100,
-  "total": 16976,
-  "result": [
+import { InjectionToken } from '@angular/core';
+
+const APP_DATA = new InjectionToken<object>('appData');
+
+const appData: any = [
     {
       "healthIndex": 85,
       "endDate": null,
@@ -1503,5 +1503,6 @@
       "startDateTime": 1514325600,
       "reportingDateTime": 1514389084
     }
-  ]
-}
+  ]; 
+
+export { APP_DATA, appData };

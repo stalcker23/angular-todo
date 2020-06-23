@@ -2,11 +2,7 @@ import { HostListener, OnInit, Directive, Input, EventEmitter, Output, HostBindi
 import { Cow } from 'src/app/core/models/cow';
 
 import { DIRECTION_TYPES, directionTypes } from 'src/app/core/enums/directionTypes.enum';
-
-export interface SortEvent {
-  column: Cow;
-  direction: directionTypes;
-}
+import { ISortColumnEvent } from 'src/app/core/interfaces/sort-event.interface';
 
 @Directive({
   selector: 'th[sortable]'
@@ -14,7 +10,7 @@ export interface SortEvent {
 export class SortableHeaderDirective implements OnInit {
   @Input() sortable: Cow ;
   @Input() direction: directionTypes;
-  @Output() sort = new EventEmitter<SortEvent>();
+  @Output() sort = new EventEmitter<ISortColumnEvent>();
 
   @HostBinding('class.asc')
   get ascSorting(){
@@ -24,6 +20,11 @@ export class SortableHeaderDirective implements OnInit {
   @HostBinding('class.desc')
   get descSorting(){
     return this.direction === this.directionTypesEnum.desc;
+  }
+
+  @HostBinding('class.sort')
+  get emptySorting(){
+    return this.direction === this.directionTypesEnum.empty;
   }
 
   private rotation: {[key: string]: directionTypes} = {

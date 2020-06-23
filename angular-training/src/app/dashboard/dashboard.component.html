@@ -1,3 +1,9 @@
 <div class="app-dashboard-container" *ngIf="cows.length > 0">
-  <app-data-table [cows]="cows"></app-data-table>
+  <app-data-table
+    [cows]="cows" 
+    (updateCow)="updateCow($event)"
+    (deleteCow)="deleteCow($event)"
+    (addCow)="addCow()"
+  >
+  </app-data-table>
 </div>

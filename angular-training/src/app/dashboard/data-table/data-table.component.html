@@ -1,8 +1,21 @@
 
+<ng-template #content let-deletingModal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Are you sure you want to delete the entry?</h4>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="deletingModal.close()">Yes</button>
+  </div>
+</ng-template>
+
 <div class="app-data-table-container table table-striped">
+  <div>
+    <button type="button" class="btn btn-primary" (click)="AddNewCow()">Add new entry</button>
+  </div>
   <table class="thead-light" style="width:100%">
     <thead>
       <tr>
+        <th>Actions</th>
         <th *ngFor="let cowPropertyKey of cowProperties | cowKeys; trackBy: trackChanges"
           sortable="{{cowPropertyKey.original}}" 
           (sort)="onSort($event)" 
@@ -13,10 +26,34 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let cow of cows">
-        <td class="app-data-table_cell" *ngFor="let cowPropertyValue of cow | objectValues">
-          {{cowPropertyValue || "Empty"}}
+      <tr *ngFor="let cow of cows; let i = index">
+        <td class="action">
+          <button type="button" class="close" (click)="openDeletingModal(content, cow)" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </td>
+        <ng-container *ngFor="let cowPropertyKey of cow | objectKeys">
+          <td *ngIf="isEditableField(cowPropertyKey) && isDigitField(cowPropertyKey)"
+            editable
+            (contentBlur)="onEditValue($event, cowPropertyKey, cow)"  
+            class="app-data-table_cell"
+            digitOnly
+          >
+            {{cow[cowPropertyKey]}}
+          </td>
+          <td *ngIf="isEditableField(cowPropertyKey) && !isDigitField(cowPropertyKey)"
+            editable
+            (contentBlur)="onEditValue($event, cowPropertyKey, cow)"  
+            class="app-data-table_cell"
+          >
+            {{cow[cowPropertyKey]}}
+          </td>
+          <td *ngIf="!isEditableField(cowPropertyKey)"
+            class="app-data-table_cell"
+          >
+            {{cow[cowPropertyKey]}}
+          </td>
+        </ng-container>
       </tr>
     </tbody>
   </table>
